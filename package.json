@@ -23,6 +23,7 @@
     "cross-env": "^5.0.5",
     "eslint-config-prettier": "^2.4.0",
     "eslint-plugin-prettier": "^2.2.0",
+    "jsonwebtoken": "^8.0.1",
     "prettier": "^1.6.1",
     "xo": "^0.18.2"
   },
