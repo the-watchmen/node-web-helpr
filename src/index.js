@@ -1,6 +1,7 @@
+import * as axios from './axios'
 import * as feathers from './feathers'
 
-export {feathers}
+export {feathers, axios}
 
 // https://github.com/auth0/node-jsonwebtoken/issues/68#issuecomment-327455866
 export function formatPublicKey({key}) {
