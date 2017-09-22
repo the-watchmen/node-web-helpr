@@ -1,6 +1,8 @@
+import assert from 'assert'
 import axios from 'axios'
 import _ from 'lodash'
 import debug from 'debug'
+import {stringify} from 'helpr'
 
 const dbg = debug('lib:web-helpr:feathers')
 
@@ -9,11 +11,17 @@ export function getIndex({url, resource}) {
   return async function(query) {
     const result = await axios.get(_url, {params: xformQuery(query)})
     dbg('index: url=%o, query=%o, result=%o', _url, query, result)
+    assert(result.data, `unexpected result=${stringify(result)}`)
+    const {data} = result
+    if (!data.data) {
+      throw new Error(data.message || stringify(data))
+    }
+
     // feathers results look like: {total: 0, limit: 5, skip: 0, data: []}
     //
     return {
-      data: result.data.data,
-      total: result.data.total,
+      data: data.data,
+      total: data.total,
       query
     }
   }
