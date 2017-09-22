@@ -37,7 +37,7 @@ export function xformQuery(query) {
     } else if (val && _.isString(val) && val.indexOf('%') >= 0) {
       result[`${key}[$like]`] = val
     } else if (key === 'sort' && val) {
-      result[`$sort[${val.field}]`] = val.isAscending ? 1 : -1
+      val.field && (result[`$sort[${val.field}]`] = val.isAscending ? 1 : -1)
     } else {
       result[key] = val
     }
