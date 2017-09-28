@@ -1,5 +1,5 @@
 {
-  "name": "web-helpr",
+  "name": "@watchmen/web-helpr",
   "version": "1.2.2",
   "main": "dist/index.js",
   "author": "tony <anthony.kerz@gmail.com>",
@@ -33,9 +33,9 @@
   },
   "ava": {
     "babel": "inherit",
-    "require": [
-      "babel-register",
-      "babel-polyfill"
-    ]
+    "require": ["babel-register", "babel-polyfill"]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
