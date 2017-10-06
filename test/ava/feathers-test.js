@@ -1,11 +1,13 @@
 import test from 'ava'
-import {feathers} from '../../src'
+import {xformQuery} from '../../src/feathers-actions'
 
 test('pre', t => {
   t.deepEqual(
-    feathers.xformQuery({
-      limit: 10,
-      offset: 10
+    xformQuery({
+      query: {
+        limit: 10,
+        offset: 10
+      }
     }),
     {
       $limit: 10,
