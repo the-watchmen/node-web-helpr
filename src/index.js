@@ -1,7 +1,8 @@
 import * as axios from './axios'
-import * as feathers from './feathers'
 
-export {feathers, axios}
+export {axios}
+export {default as getFeathersActions} from './feathers-actions'
+export {default as getRestActions} from './rest-actions'
 
 // https://github.com/auth0/node-jsonwebtoken/issues/68#issuecomment-327455866
 export function formatPublicKey({key}) {
