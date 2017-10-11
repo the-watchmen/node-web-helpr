@@ -1,10 +1,14 @@
 import assert from 'assert'
 import _ from 'lodash'
 import debug from 'debug'
-import {stringify} from 'helpr'
+import {stringify} from '@watchmen/helpr'
 import getActions from './rest-actions'
 
 const dbg = debug('lib:web-helpr:feathers-actions')
+
+const wildIn = '*'
+const re = new RegExp(`\\${wildIn}`, 'g')
+const wildOut = '%'
 
 export default function({url, resource}) {
   const actions = getActions({url, resource})
@@ -37,8 +41,8 @@ export function xformQuery({query}) {
       result['$skip'] = val
     } else if (key === 'limit') {
       result['$limit'] = val
-    } else if (val && _.isString(val) && val.indexOf('%') >= 0) {
-      result[`${key}[$like]`] = val
+    } else if (val && _.isString(val) && val.indexOf(wildIn) >= 0) {
+      result[`${key}[$like]`] = val.replace(re, wildOut)
     } else if (key === 'sort' && val) {
       val.field && (result[`$sort[${val.field}]`] = val.isAscending ? 1 : -1)
     } else {
