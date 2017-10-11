@@ -6,12 +6,14 @@ test('pre', t => {
     xformQuery({
       query: {
         limit: 10,
-        offset: 10
+        offset: 10,
+        foo: 'bar*baz'
       }
     }),
     {
       $limit: 10,
-      $skip: 10
+      $skip: 10,
+      'foo[$like]': 'bar%baz'
     }
   )
 })
