@@ -36,3 +36,33 @@ export function formatPublicKey({key}) {
 
   return `${beginKey}\n${keyArray.join('')}${endKey}\n`
 }
+
+export function dbgReq({dbg, req}) {
+  dbg(
+    '[%s]%s: params=%o, query=%o, body=%o, user=%o',
+    req.method,
+    req.path,
+    req.params,
+    req.query,
+    req.body,
+    req.user
+  )
+}
+
+export function combine({req}) {
+  const params = _.transform(req.params, (result, value, key) => {
+    const _key = key === '_id' ? key : _.replace(key, '_', '.')
+    return (result[_key] = value) // eslint-disable-line no-return-assign
+  })
+
+  return {
+    ...req.query,
+    ...params
+  }
+}
+
+export function forward({req, res, next, router, id}) {
+  req.url = id ? `/${id}` : '/'
+  req.query = combine(req)
+  router(req, res, next)
+}
