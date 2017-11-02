@@ -1,5 +1,6 @@
 import test from 'ava'
 import jwt from 'jsonwebtoken'
+import jws from 'jws'
 import debug from 'debug'
 import {webHelpr} from '../../src/index'
 
@@ -18,11 +19,18 @@ const secret = webHelpr.formatPublicKey({
 
 const algorithms = ['RS256']
 const options = {algorithms, ignoreExpiration: true}
+// const options = {ignoreExpiration: true}
 
 test('verify', t => {
   const decoded = jwt.verify(token, secret, options)
   dbg('decoded=%o', decoded)
   t.is(decoded.aud, 'client-1')
+})
+
+test('verify-jws', t => {
+  const isVerified = jws.verify(token, 'RS256', secret)
+  dbg('verified=%o', isVerified)
+  t.truthy(isVerified)
 })
 
 test('verify2', t => {
