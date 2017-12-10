@@ -44,9 +44,9 @@
   dependencies:
     arrify "^1.0.1"
 
-"@watchmen/helpr@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@watchmen/helpr/-/helpr-1.0.5.tgz#792dd4042a630d487ad9b54c2e892b2c9b26feef"
+"@watchmen/helpr@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@watchmen/helpr/-/helpr-1.0.6.tgz#aa0f8c196bf934abec8a07474a9ef74c0e290694"
   dependencies:
     config "^1.28.1"
     debug "^3.1.0"
