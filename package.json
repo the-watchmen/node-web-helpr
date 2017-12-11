@@ -1,6 +1,6 @@
 {
   "name": "@watchmen/web-helpr",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "main": "dist/index.js",
   "author": "tony <anthony.kerz@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "build": "rm -rf ./dist && babel ./src -d ./dist"
   },
   "dependencies": {
-    "@watchmen/helpr": "^1.0.6",
+    "@watchmen/helpr": "^1.0.8",
     "axios": "^0.17.1",
     "debug": "^3.1.0",
     "lodash": "^4.17.4"
