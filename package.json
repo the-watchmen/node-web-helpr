@@ -1,6 +1,6 @@
 {
   "name": "@watchmen/web-helpr",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "main": "dist/index.js",
   "author": "tony <anthony.kerz@gmail.com>",
   "license": "MIT",
