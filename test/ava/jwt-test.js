@@ -2,7 +2,7 @@ import test from 'ava'
 import jwt from 'jsonwebtoken'
 import jws from 'jws'
 import debug from 'debug'
-import {webHelpr} from '../../src/index'
+import {webHelpr} from '../../src'
 
 const dbg = debug('test:jwt')
 

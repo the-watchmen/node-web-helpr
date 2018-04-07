@@ -19,7 +19,7 @@ export default function({url, resource}) {
       return {
         data,
         // x-total-count optional...
-        total: result.headers['x-total-count'],
+        total: parseInt(result.headers['x-total-count']),
         query
       }
     }
