@@ -12,33 +12,41 @@
     "build": "rm -rf ./dist && babel ./src -d ./dist"
   },
   "dependencies": {
-    "@watchmen/helpr": "^2.3.1",
-    "axios": "^0.18.0",
-    "debug": "^3.1.0",
-    "lodash": "^4.17.5"
+    "@watchmen/helpr": "2.3.8",
+    "axios": "0.19.0",
+    "debug": "4.1.1",
+    "lodash": "4.17.11"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "babel-cli": "^6.22.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "cross-env": "^5.1.4",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jsonwebtoken": "8.2.1",
-    "jws": "^3.1.4",
-    "prettier": "^1.11.1",
-    "xo": "^0.20.3"
-  },
-  "xo": {
-    "useEslintrc": true
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "7.4.5",
+    "@babel/register": "7.4.4",
+    "ava": "1.4.1",
+    "cross-env": "5.2.0",
+    "jsonwebtoken": "8.5.1",
+    "jws": "3.2.2",
+    "xo": "0.24.0"
   },
   "ava": {
-    "babel": "inherit",
     "require": [
-      "babel-register",
-      "babel-polyfill"
+      "@babel/register",
+      "@babel/polyfill"
     ]
+  },
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "radix": 0,
+      "no-unused-expressions": [
+        2,
+        {
+          "allowShortCircuit": true,
+          "allowTernary": true
+        }
+      ]
+    }
   },
   "publishConfig": {
     "access": "public"
