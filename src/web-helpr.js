@@ -38,17 +38,26 @@ export function formatPublicKey({key}) {
 	return `${beginKey}\n${keyArray.join('')}${endKey}\n`
 }
 
-export function dbgReq({dbg, req}) {
-	dbg(
-		'[%s]%s: params=%o, query=%o, body=%o, user=%o, session=%o',
-		req.method,
-		req.path,
-		req.params,
-		req.query,
-		req.body,
-		req.user,
-		req.session
+export function dbgReq({msg, dbg, req}) {
+	const attrs = ['params', 'query', 'body', 'user', 'session']
+	const tokens = []
+	let args = msg ? [msg] : []
+	let _msg = msg ? '%s: ' : ''
+	args.push(req.method, req.path)
+	_msg += '[%s]%s: '
+	args = _.transform(
+		attrs,
+		(result, attr) => {
+			const val = req[attr]
+			if (_.isObjectLike(val) ? !_.isEmpty(val) : val) {
+				result.push(val)
+				tokens.push(`${attr}=%o`)
+			}
+		},
+		args
 	)
+	_msg = `${_msg}${tokens.join(', ')}`
+	dbg(_msg, ...args)
 }
 
 export function combine({req}) {
