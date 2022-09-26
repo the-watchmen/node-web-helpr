@@ -1,7 +1,7 @@
 import test from 'ava'
-import {xformQuery} from '../../src/feathers-actions'
+import {xformQuery} from '../../src/feathers-actions.js'
 
-test('pre', t => {
+test('pre', (t) => {
 	t.deepEqual(
 		xformQuery({
 			query: {

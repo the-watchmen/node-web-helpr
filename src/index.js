@@ -1,6 +1,4 @@
-import * as webHelpr from './web-helpr'
-
-export {webHelpr}
-export {default as getFeathersActions} from './feathers-actions'
-export {default as getRestActions} from './rest-actions'
-export {default as getStandardActions} from './standard-actions'
+export {default as getFeathersActions} from './feathers-actions.js'
+export {default as getRestActions} from './rest-actions.js'
+export {default as getStandardActions} from './standard-actions.js'
+export * as webHelpr from './web-helpr.js'

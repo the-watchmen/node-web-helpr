@@ -20,10 +20,7 @@ export function formatPublicKey({key}) {
 	const beginKey = `-----BEGIN PUBLIC KEY-----`
 	const endKey = `-----END PUBLIC KEY-----`
 
-	const sanatizedKey = key
-		.replace(beginKey, '')
-		.replace(endKey, '')
-		.replace('\n', '')
+	const sanatizedKey = key.replace(beginKey, '').replace(endKey, '').replace('\n', '')
 
 	const keyArray = sanatizedKey.split('').map((l, i) => {
 		const position = i + 1
@@ -38,37 +35,38 @@ export function formatPublicKey({key}) {
 	return `${beginKey}\n${keyArray.join('')}${endKey}\n`
 }
 
+// eslint-disable-next-line unicorn/prevent-abbreviations
 export function dbgReq({msg, dbg, req}) {
 	const attrs = ['params', 'query', 'body', 'user', 'session']
 	const tokens = []
 	let args = msg ? [msg] : []
-	let _msg = msg ? '%s: ' : ''
+	let _message = msg ? '%s: ' : ''
 	args.push(req.method, req.path)
-	_msg += '[%s]%s: '
+	_message += '[%s]%s: '
 	args = _.transform(
 		attrs,
 		(result, attr) => {
-			const val = req[attr]
-			if (_.isObjectLike(val) ? !_.isEmpty(val) : val) {
-				result.push(val)
+			const value = req[attr]
+			if (_.isObjectLike(value) ? !_.isEmpty(value) : value) {
+				result.push(value)
 				tokens.push(`${attr}=%o`)
 			}
 		},
 		args
 	)
-	_msg = `${_msg}${tokens.join(', ')}`
-	dbg(_msg, ...args)
+	_message = `${_message}${tokens.join(', ')}`
+	dbg(_message, ...args)
 }
 
 export function combine({req}) {
-	const params = _.transform(req.params, (result, value, key) => {
+	const parameters = _.transform(req.params, (result, value, key) => {
 		const _key = key === '_id' ? key : _.replace(key, '_', '.')
 		return (result[_key] = value) // eslint-disable-line no-return-assign
 	})
 
 	return {
 		...req.query,
-		...params
+		...parameters
 	}
 }
 

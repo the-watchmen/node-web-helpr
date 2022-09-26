@@ -1,8 +1,8 @@
-import assert from 'assert'
+import assert from 'node:assert'
 import _ from 'lodash'
 import debug from 'debug'
 import {stringify} from '@watchmen/helpr'
-import getActions from './rest-actions'
+import getActions from './rest-actions.js'
 
 const dbg = debug('lib:web-helpr:feathers-actions')
 
@@ -10,12 +10,12 @@ const wildIn = '*'
 const re = new RegExp(`\\${wildIn}`, 'g')
 const wildOut = '%'
 
-export default function({url, resource}) {
+export default function ({url, resource}) {
 	const actions = getActions({url, resource})
 
 	return {
 		...actions,
-		index: async ({query}) => {
+		async index({query}) {
 			const result = await actions.index({query: xformQuery({query})})
 			assert(result.data, `unexpected result=${stringify(result)}`)
 			const {data} = result
@@ -36,17 +36,18 @@ export default function({url, resource}) {
 
 export function xformQuery({query}) {
 	dbg('xform-query: query=%o', query)
-	return _.transform(query, (result, val, key) => {
+	return _.transform(query, (result, value, key) => {
 		if (key === 'offset') {
-			result.$skip = val
+			result.$skip = value
 		} else if (key === 'limit') {
-			result.$limit = val
-		} else if (val && _.isString(val) && val.indexOf(wildIn) >= 0) {
-			result[`${key}[$like]`] = val.replace(re, wildOut)
-		} else if (key === 'sort' && val) {
-			val.field && (result[`$sort[${val.field}]`] = val.isAscending ? 1 : -1)
+			result.$limit = value
+		} else if (value && _.isString(value) && value.includes(wildIn)) {
+			result[`${key}[$like]`] = value.replace(re, wildOut)
+		} else if (key === 'sort' && value) {
+			// eslint-disable-next-line no-unused-expressions
+			value.field && (result[`$sort[${value.field}]`] = value.isAscending ? 1 : -1)
 		} else {
-			result[key] = val
+			result[key] = value
 		}
 	})
 }
